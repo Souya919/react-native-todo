@@ -1,0 +1,15 @@
+{
+  "expo": {
+    "name": "todolist-app",
+    "slug": "todolist-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "6ded08b1-07b9-4189-a141-16b08fec8931"
+      }
+    }
+  }
+}
