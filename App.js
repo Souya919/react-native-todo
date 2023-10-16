@@ -27,11 +27,9 @@ export default function App() {
       const result = await LocalAuthentication.authenticateAsync();
       if (result.success) {
         // Authentication successful
-        console.log("Authentication successful");
         setIsAuthenticated(true);
       } else {
         // Authentication failed
-        console.log("Authentication failed");
         setIsAuthenticated(false);
       }
     } catch (error) {
@@ -56,10 +54,10 @@ export default function App() {
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
-      await handleAuthentication();
+      if (!isAuthenticated) await handleAuthentication();
       await SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded, isAuthenticated]);
 
   if (!fontsLoaded) {
     return null;
@@ -82,19 +80,6 @@ export default function App() {
       return prevTodo.filter((todo) => todo.key != key);
     });
   };
-
-  if (!fontsLoaded || !isAuthenticated) {
-    return (
-      <ComponentContainer onLayout={onLayoutRootView}>
-        <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-        >
-          <Text>Press the button to authenticate</Text>
-          <Button title="Authenticate" onPress={handleAuthentication} />
-        </View>
-      </ComponentContainer>
-    );
-  }
 
   return (
     <ComponentContainer onLayout={onLayoutRootView}>
