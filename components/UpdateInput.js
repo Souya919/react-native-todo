@@ -1,26 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import { AntDesign } from "@expo/vector-icons";
 
-export default function AddInput({ submitHandler }) {
+export default function UpdateInput({ selectedItem, updateHandler }) {
   const [value, setValue] = useState("");
+
+  useEffect(() => {
+    setValue(selectedItem.value);
+  }, [selectedItem]);
 
   const onChangeText = (text) => {
     setValue(text);
   };
 
   const handleSubmit = () => {
-    if (value) submitHandler(value);
+    if (value) updateHandler(selectedItem.key, value);
   };
 
   return (
     <ComponentContainer>
       <InputContainer>
-        <Input placeholder="Add Task..." onChangeText={onChangeText} />
+        <Input
+          placeholder="Update Task..."
+          value={value}
+          onChangeText={onChangeText}
+        />
       </InputContainer>
       <SubmitButton onPress={handleSubmit}>
-        <AntDesign name="plus" size={24} color="midnightblue" />
+        <AntDesign name="edit" size={24} color="midnightblue" />
       </SubmitButton>
     </ComponentContainer>
   );

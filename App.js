@@ -3,6 +3,7 @@ import { View, StatusBar, FlatList, Text, Button } from "react-native";
 import * as LocalAuthentication from "expo-local-authentication";
 import styled from "styled-components";
 import AddInput from "./components/AddInput";
+import UpdateInput from "./components/UpdateInput";
 import TodoList from "./components/TodoList";
 import * as Font from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -21,7 +22,10 @@ export default function App() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [data, setData] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isUpdating, setIsUpdating] = useState(false);
 
+  // Handle authentication using LocalAuthentication
   const handleAuthentication = async () => {
     try {
       const result = await LocalAuthentication.authenticateAsync();
@@ -39,6 +43,7 @@ export default function App() {
   };
 
   useEffect(() => {
+    // Load fonts, authenticate, hide splash screen
     async function prepare() {
       try {
         await getFonts();
@@ -63,6 +68,7 @@ export default function App() {
     return null;
   }
 
+  // Handler for submitting new data item
   const submitHandler = (value) => {
     setData((prevTodo) => {
       return [
@@ -75,6 +81,33 @@ export default function App() {
     });
   };
 
+  // Handler for updating a data item
+  const handleUpdate = (key, updatedValue) => {
+    // Find the index of the item with the matching key
+    const index = data.findIndex((item) => item.key === key);
+
+    // Create a copy of the data array and update the value of the item at the found index
+    const newData = [...data];
+    newData[index].value = updatedValue;
+
+    // Set the updated data array as the new state
+    setData(newData);
+
+    // Reset the selectedItem state variable and setIsUpdating to false
+    setSelectedItem(null);
+    setIsUpdating(false);
+  };
+
+  // Update the selectedItem state variable for editing
+  const updateItem = (key) => {
+    // Find the item with the matching key from the data array
+    const selectedItem = data.find((item) => item.key === key);
+    // Set the selectedItem state variable with the found item
+    setSelectedItem(selectedItem);
+    setIsUpdating(true);
+  };
+
+  // Delete a data item
   const deleteItem = (key) => {
     setData((prevTodo) => {
       return prevTodo.filter((todo) => todo.key != key);
@@ -88,17 +121,30 @@ export default function App() {
       </View>
 
       <View>
+        {/* Displaying a list of data items */}
         <FlatList
           data={data}
           ListHeaderComponent={() => <Header />}
           ListEmptyComponent={() => <Empty />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
-            <TodoList item={item} deleteItem={deleteItem} />
+            <TodoList
+              item={item}
+              updateItem={updateItem}
+              deleteItem={deleteItem}
+            />
           )}
         />
         <View>
-          <AddInput submitHandler={submitHandler} />
+          {/* Conditional rendering based on isUpdating state */}
+          {isUpdating ? (
+            <UpdateInput
+              selectedItem={selectedItem}
+              updateHandler={handleUpdate}
+            />
+          ) : (
+            <AddInput submitHandler={submitHandler} />
+          )}
         </View>
       </View>
     </ComponentContainer>

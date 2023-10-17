@@ -4,7 +4,7 @@ import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import styled from "styled-components";
 
-export default function TodoList({ item, deleteItem }) {
+export default function TodoList({ item, updateItem, deleteItem }) {
   return (
     <ComponentContainer>
       <ListContainer>
@@ -15,6 +15,9 @@ export default function TodoList({ item, deleteItem }) {
           <TextItem>{item.value}</TextItem>
           <TextDate> Task</TextDate>
         </View>
+        <IconContainer onPress={() => updateItem(item.key)}>
+          <MaterialIcons name="edit" size={24} color="midnightblue" />
+        </IconContainer>
         <IconContainer onPress={() => deleteItem(item.key)}>
           <MaterialIcons name="delete" size={24} color="midnightblue" />
         </IconContainer>
@@ -54,7 +57,6 @@ const TextDate = styled.Text`
   color: goldenrod;
   font-size: 15px;
   margin-right: 20px;
-
   font-family: poppins-regular;
   border-radius: 10px;
   width: 40px;
@@ -63,11 +65,9 @@ const TextDate = styled.Text`
 const IconContainer = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
-  margin-right: 10px;
+  margin-right: 0;
   margin-top: 15px;
-
   height: 40px;
-
   border-radius: 10px;
 `;
 
