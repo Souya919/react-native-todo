@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<AddInput /> renders correctly 1`] = `
+<View
+  style={
+    {
+      "flexDirection": "row",
+    }
+  }
+>
+  <View
+    style={
+      {
+        "borderRadius": 10,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <TextInput
+      onChangeText={[Function]}
+      placeholder="Add Task..."
+      style={
+        {
+          "backgroundColor": "white",
+          "borderRadius": 10,
+          "fontFamily": "poppins-regular",
+          "fontSize": 20,
+          "marginBottom": 20,
+          "marginRight": 20,
+          "padding": 10,
+          "width": 300,
+        }
+      }
+    />
+  </View>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "alignItems": "center",
+        "backgroundColor": "whitesmoke",
+        "borderRadius": 50,
+        "justifyContent": "center",
+        "marginBottom": 20,
+        "opacity": 1,
+        "width": 50,
+      }
+    }
+  >
+    <AntDesign
+      color="midnightblue"
+      name="plus"
+      size={24}
+    />
+  </View>
+</View>
+`;

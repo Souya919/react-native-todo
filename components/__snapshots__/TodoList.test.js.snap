@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TodoList /> renders correctly 1`] = `
+<View
+  style={
+    {
+      "flexDirection": "row",
+      "height": "auto",
+      "justifyContent": "center",
+      "width": "auto",
+    }
+  }
+>
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={false}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "backgroundColor": "whitesmoke",
+        "borderRadius": 10,
+        "flexDirection": "row",
+        "height": "auto",
+        "justifyContent": "space-between",
+        "marginBottom": 30,
+        "opacity": 1,
+        "width": 350,
+      }
+    }
+  >
+    <View
+      style={
+        {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "paddingLeft": 5,
+        }
+      }
+    >
+      <Entypo
+        color="midnightblue"
+        name="circle"
+        size={20}
+      />
+    </View>
+    <View>
+      <Text
+        style={
+          {
+            "color": "black",
+            "fontFamily": "poppins-regular",
+            "fontSize": 20,
+            "height": "auto",
+            "marginRight": 20,
+            "marginTop": 10,
+            "width": 260,
+          }
+        }
+      >
+        Sample task
+      </Text>
+      <Text
+        style={
+          {
+            "borderRadius": 10,
+            "color": "goldenrod",
+            "fontFamily": "poppins-regular",
+            "fontSize": 15,
+            "marginRight": 20,
+            "width": 40,
+          }
+        }
+      >
+         Task
+      </Text>
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "borderRadius": 10,
+          "height": 40,
+          "justifyContent": "center",
+          "marginRight": 0,
+          "marginTop": 15,
+          "opacity": 1,
+        }
+      }
+    >
+      <MaterialIcons
+        color="midnightblue"
+        name="edit"
+        size={24}
+      />
+    </View>
+    <View
+      accessibilityState={
+        {
+          "busy": undefined,
+          "checked": undefined,
+          "disabled": undefined,
+          "expanded": undefined,
+          "selected": undefined,
+        }
+      }
+      accessibilityValue={
+        {
+          "max": undefined,
+          "min": undefined,
+          "now": undefined,
+          "text": undefined,
+        }
+      }
+      accessible={true}
+      collapsable={false}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        {
+          "alignItems": "center",
+          "borderRadius": 10,
+          "height": 40,
+          "justifyContent": "center",
+          "marginRight": 0,
+          "marginTop": 15,
+          "opacity": 1,
+        }
+      }
+    >
+      <MaterialIcons
+        color="midnightblue"
+        name="delete"
+        size={24}
+      />
+    </View>
+  </View>
+</View>
+`;

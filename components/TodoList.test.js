@@ -16,14 +16,14 @@ describe("<TodoList />", () => {
       value: "Sample task",
     };
 
-    // Define mock updateItem and deleteItem functions
-    const updateItem = jest.fn();
+    // Define mock editItem and deleteItem functions
+    const editItem = jest.fn();
     const deleteItem = jest.fn();
 
     // Render the TodoList component with the required props
     const tree = renderer
       .create(
-        <TodoList item={item} updateItem={updateItem} deleteItem={deleteItem} />
+        <TodoList item={item} editItem={editItem} deleteItem={deleteItem} />
       )
       .toJSON();
 

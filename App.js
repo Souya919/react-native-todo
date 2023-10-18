@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { View, StatusBar, FlatList, Text, Button } from "react-native";
+import { View, StatusBar, FlatList } from "react-native";
 import * as LocalAuthentication from "expo-local-authentication";
 import styled from "styled-components";
 import AddInput from "./components/AddInput";
@@ -25,8 +25,8 @@ export default function App() {
   const [selectedItem, setSelectedItem] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
 
-  // Handle authentication using LocalAuthentication
-  const handleAuthentication = async () => {
+  // Authenticate using LocalAuthentication
+  const authenticate = async () => {
     try {
       const result = await LocalAuthentication.authenticateAsync();
       if (result.success) {
@@ -57,9 +57,9 @@ export default function App() {
     prepare();
   }, []);
 
-  const onLayoutRootView = useCallback(async () => {
+  const layoutRootView = useCallback(async () => {
     if (fontsLoaded) {
-      if (!isAuthenticated) await handleAuthentication();
+      if (!isAuthenticated) await authenticate();
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded, isAuthenticated]);
@@ -68,8 +68,8 @@ export default function App() {
     return null;
   }
 
-  // Handler for submitting new data item
-  const submitHandler = (value) => {
+  // Add a new item
+  const addItem = (value) => {
     setData((prevTodo) => {
       return [
         {
@@ -82,16 +82,17 @@ export default function App() {
   };
 
   // Handler for updating a data item
-  const handleUpdate = (key, updatedValue) => {
+  const updateItem = (key, updatedValue) => {
     // Find the index of the item with the matching key
     const index = data.findIndex((item) => item.key === key);
 
-    // Create a copy of the data array and update the value of the item at the found index
-    const newData = [...data];
-    newData[index].value = updatedValue;
+    // Update the value of an element at a specific index in the data array
+    const updatedData = data.map((item, i) => {
+      return i === index ? { ...item, value: updatedValue } : item;
+    });
 
     // Set the updated data array as the new state
-    setData(newData);
+    setData(updatedData);
 
     // Reset the selectedItem state variable and setIsUpdating to false
     setSelectedItem(null);
@@ -99,7 +100,7 @@ export default function App() {
   };
 
   // Update the selectedItem state variable for editing
-  const updateItem = (key) => {
+  const editItem = (key) => {
     // Find the item with the matching key from the data array
     const selectedItem = data.find((item) => item.key === key);
     // Set the selectedItem state variable with the found item
@@ -115,7 +116,7 @@ export default function App() {
   };
 
   return (
-    <ComponentContainer onLayout={onLayoutRootView}>
+    <ComponentContainer onLayout={layoutRootView}>
       <View>
         <StatusBar barStyle="light-content" backgroundColor="midnightblue" />
       </View>
@@ -128,22 +129,15 @@ export default function App() {
           ListEmptyComponent={() => <Empty />}
           keyExtractor={(item) => item.key}
           renderItem={({ item }) => (
-            <TodoList
-              item={item}
-              updateItem={updateItem}
-              deleteItem={deleteItem}
-            />
+            <TodoList item={item} editItem={editItem} deleteItem={deleteItem} />
           )}
         />
         <View>
           {/* Conditional rendering based on isUpdating state */}
           {isUpdating ? (
-            <UpdateInput
-              selectedItem={selectedItem}
-              updateHandler={handleUpdate}
-            />
+            <UpdateInput selectedItem={selectedItem} updateItem={updateItem} />
           ) : (
-            <AddInput submitHandler={submitHandler} />
+            <AddInput addItem={addItem} />
           )}
         </View>
       </View>

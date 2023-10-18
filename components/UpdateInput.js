@@ -1,64 +1,70 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import { View, TextInput, TouchableOpacity } from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
 
-export default function UpdateInput({ selectedItem, updateHandler }) {
+export default function UpdateInput({ selectedItem, updateItem }) {
   const [value, setValue] = useState("");
 
   useEffect(() => {
+    // Set the value state with the selected item's value whenever it changes
     setValue(selectedItem.value);
   }, [selectedItem]);
 
-  const onChangeText = (text) => {
-    setValue(text);
+  // Updates the value state with the input text
+  const updateValue = (val) => {
+    setValue(val);
   };
 
-  const handleSubmit = () => {
-    if (value) updateHandler(selectedItem.key, value);
+  const updateItemOnSubmit = () => {
+    // If a value exists, call the updateItem function with the selected item's key and the updated value
+    if (value) updateItem(selectedItem.key, value);
   };
 
   return (
-    <ComponentContainer>
-      <InputContainer>
-        <Input
+    <View style={styles.componentContainer}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
           placeholder="Update Task..."
           value={value}
-          onChangeText={onChangeText}
+          onChangeText={updateValue}
         />
-      </InputContainer>
-      <SubmitButton onPress={handleSubmit}>
+      </View>
+      <TouchableOpacity
+        style={styles.submitButton}
+        onPress={updateItemOnSubmit}
+      >
         <AntDesign name="edit" size={24} color="midnightblue" />
-      </SubmitButton>
-    </ComponentContainer>
+      </TouchableOpacity>
+    </View>
   );
 }
 
-const ComponentContainer = styled.View`
-  flex-direction: row;
-`;
-
-const InputContainer = styled.View`
-  flex-direction: row;
-  border-radius: 10px;
-`;
-
-const Input = styled.TextInput`
-  font-family: poppins-regular;
-  font-size: 20px;
-  background-color: white;
-  width: 300px;
-  margin-right: 20px;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 10px;
-`;
-
-const SubmitButton = styled.TouchableOpacity`
-  width: 50px;
-  justify-content: center;
-  align-items: center;
-  background-color: whitesmoke;
-  margin-bottom: 20px;
-  border-radius: 50px;
-`;
+const styles = {
+  componentContainer: {
+    flexDirection: "row",
+  },
+  inputContainer: {
+    flexDirection: "row",
+    borderRadius: 10,
+  },
+  input: {
+    fontFamily: "poppins-regular",
+    fontSize: 20,
+    backgroundColor: "white",
+    width: 300,
+    marginRight: 20,
+    padding: 10,
+    marginBottom: 20,
+    borderRadius: 10,
+  },
+  submitButton: {
+    width: 50,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "whitesmoke",
+    marginBottom: 20,
+    borderRadius: 50,
+  },
+};

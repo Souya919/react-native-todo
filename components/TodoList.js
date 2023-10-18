@@ -1,78 +1,79 @@
 import React from "react";
-import { View } from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import styled from "styled-components";
+import { View, TouchableOpacity, Text } from "react-native";
+import { Entypo, MaterialIcons } from "@expo/vector-icons";
 
-export default function TodoList({ item, updateItem, deleteItem }) {
+export default function TodoList({ item, editItem, deleteItem }) {
   return (
-    <ComponentContainer>
-      <ListContainer>
-        <CirlceContainer>
+    <View style={styles.componentContainer}>
+      <TouchableOpacity style={styles.listContainer}>
+        <View style={styles.circleContainer}>
           <Entypo name="circle" size={20} color="midnightblue" />
-        </CirlceContainer>
-        <View>
-          <TextItem>{item.value}</TextItem>
-          <TextDate> Task</TextDate>
         </View>
-        <IconContainer onPress={() => updateItem(item.key)}>
+        <View>
+          <Text style={styles.textItem}>{item.value}</Text>
+          <Text style={styles.textDate}> Task</Text>
+        </View>
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => editItem(item.key)}
+        >
           <MaterialIcons name="edit" size={24} color="midnightblue" />
-        </IconContainer>
-        <IconContainer onPress={() => deleteItem(item.key)}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => deleteItem(item.key)}
+        >
           <MaterialIcons name="delete" size={24} color="midnightblue" />
-        </IconContainer>
-      </ListContainer>
-    </ComponentContainer>
+        </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 }
 
-const ListContainer = styled.TouchableOpacity`
-  background-color: whitesmoke;
-  height: auto;
-  width: 350px;
-  margin-bottom: 30px;
-  border-radius: 10px;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-
-const ComponentContainer = styled.View`
-  flex-direction: row;
-  justify-content: center;
-  height: auto;
-  width: auto;
-`;
-
-const TextItem = styled.Text`
-  color: black;
-  width: 260px;
-  height: auto;
-  font-size: 20px;
-  margin-top: 10px;
-  margin-right: 20px;
-  font-family: poppins-regular;
-`;
-
-const TextDate = styled.Text`
-  color: goldenrod;
-  font-size: 15px;
-  margin-right: 20px;
-  font-family: poppins-regular;
-  border-radius: 10px;
-  width: 40px;
-`;
-
-const IconContainer = styled.TouchableOpacity`
-  align-items: center;
-  justify-content: center;
-  margin-right: 0;
-  margin-top: 15px;
-  height: 40px;
-  border-radius: 10px;
-`;
-
-const CirlceContainer = styled.View`
-  align-items: center;
-  justify-content: center;
-  padding-left: 5px;
-`;
+const styles = {
+  componentContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    height: "auto",
+    width: "auto",
+  },
+  listContainer: {
+    backgroundColor: "whitesmoke",
+    height: "auto",
+    width: 350,
+    marginBottom: 30,
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  textItem: {
+    color: "black",
+    width: 260,
+    height: "auto",
+    fontSize: 20,
+    marginTop: 10,
+    marginRight: 20,
+    fontFamily: "poppins-regular",
+  },
+  textDate: {
+    color: "goldenrod",
+    fontSize: 15,
+    marginRight: 20,
+    fontFamily: "poppins-regular",
+    borderRadius: 10,
+    width: 40,
+  },
+  iconContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: 0,
+    marginTop: 15,
+    height: 40,
+    borderRadius: 10,
+  },
+  circleContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingLeft: 5,
+  },
+};
